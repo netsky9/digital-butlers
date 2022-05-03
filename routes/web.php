@@ -15,11 +15,11 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/verify/{token}',  [App\Http\Controllers\Auth\RegisterController::class, 'verify'])->name('register.verify');
+Route::get('/verify/{token}',  [App\Http\Controllers\Auth\CustomValidationController::class, 'verify'])->name('register.verify');
 
 Auth::routes();
 
-Route::get('/profile', [App\Http\Controllers\ProfileController::class, 'index'])->middleware('auth');
+Route::get('/profile', [App\Http\Controllers\ProfileController::class, 'index'])->middleware('auth')->name('profile.index');
 Route::post('/profile', [App\Http\Controllers\ProfileController::class, 'update'])->middleware('auth')->name('profile.update');
 
 

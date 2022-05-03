@@ -98,25 +98,4 @@ class RegisterController extends Controller
 		return redirect()->route('login')
 			->with('success', 'Check your email and click on the link to verify!');
 	}
-
-
-	public function verify($token)
-	{
-
-		$user = User::where('verify_token', $token)->first();
-
-		if(!$user){
-			App::abort(404);
-		}
-
-		if(!$user->email_verified_at){
-			$user->email_verified_at = Carbon::now();
-			$user->save();
-		}
-
-		Auth::login($user);
-
-		return redirect()->route('home')
-			->with('success', 'Hello, '.$user->name);
-	}
 }
